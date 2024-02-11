@@ -1,0 +1,10 @@
+[Unit]
+Description=Update git repository %I
+
+[Service]
+Type=simple
+WorkingDirectory=%I
+ExecStart=/usr/bin/git fetch --all
+
+[Install]
+WantedBy=default.target

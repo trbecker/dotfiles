@@ -1,0 +1,10 @@
+[Unit]
+Description=Update git repository %I
+
+[Timer]
+OnCalendar=Daily
+Persistent=true
+Unit=update-git@%i.service
+
+[Install]
+WantedBy=timers.target
