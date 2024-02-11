@@ -1,0 +1,15 @@
+#!/bin/bash
+# Ansible managed
+LNX=.
+find  $LNX                                                                    \
+	-path "$LNX/arch/*" ! -path "$LNX/arch/i386*" -prune -o               \
+	-path "$LNX/include/asm-*" ! -path "$LNX/include/asm-i386*" -prune -o \
+	-path "$LNX/tmp*" -prune -o                                           \
+	-path "$LNX/Documentation*" -prune -o                                 \
+	-path "$LNX/scripts*" -prune -o                                       \
+	-path "$LNX/drivers*" -prune -o                                       \
+	-name "*.[chxsS]" > cscope.files
+
+cscope -cb -q -k
+ctags --fields=+i -n -L cscope.files
+cqmakedb -s project.db -c cscope.out -t tags -p

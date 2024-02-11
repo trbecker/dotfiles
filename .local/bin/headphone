@@ -1,0 +1,15 @@
+#!/bin/bash
+
+case $1 in
+	"on")
+	amixer -c 0 set 'Headphone' unmute 100%
+	;;
+
+	"off")
+	amixer -c 0 set 'Headphone' mute 0%
+	;;
+	
+	*)
+	echo "WAT?"
+	;;
+esac

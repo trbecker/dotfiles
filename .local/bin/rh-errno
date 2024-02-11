@@ -1,0 +1,19 @@
+# Resolve system error numbers.
+# Requires kernel-headers package
+# Maintainer: Brad Hubbard
+
+#!/bin/bash
+
+PROG=$(basename $0)
+usage() {
+    echo "Usage: $PROG error_number"
+    echo "Requires kernel-headers package"
+}
+
+if [ $# -ne 1 ] || [ ! -r /usr/include/asm-generic/errno-base.h ] || [ ! -r /usr/include/asm-generic/errno.h ]
+then
+        usage
+        exit 1
+fi
+
+gawk -v search=${1} -v token="Lorem Ipsum" '{if($3 == search) {token = $2; print($0)} if($3 == token) {print($0)}}' /usr/include/asm-generic/errno-base.h /usr/include/asm-generic/errno.h
