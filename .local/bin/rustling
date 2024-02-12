@@ -1,0 +1,8 @@
+#!/bin/bash
+
+CMD=$@
+if [ -z $CMD ] ; then
+	CMD="bash"
+fi
+
+podman run -it -v $PWD:/src:z rustling $CMD
