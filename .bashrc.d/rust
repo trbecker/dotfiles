@@ -1,0 +1,6 @@
+ if [ -f "$HOME/.cargo/env" ] ; then
+         source "$HOME/.cargo/env"
+         if command -v rustup > /dev/null ; then
+                 source <(rustup completions bash)
+         fi
+ fi

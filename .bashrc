@@ -16,25 +16,22 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
-fi
-
 unset rc
 
 export EDITOR=vim
 
-if [ -f "$HOME/.cargo/env" ] ; then
-        source "$HOME/.cargo/env"
-        if command -v rustup > /dev/null ; then
-                source <(rustup completions bash)
-        fi
-fi
+for src in ${HOME}/.bashrc.d/*.enabled ; do
+	source ${src}
+done
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
+function bashrc_enable {
+	if [ -f ${HOME}/.bashrc.d/$1 ] ; then
+		ln -sf ${HOME}/.bashrc.d/$1 ${HOME}/.bashrc.d/$1.enabled
+	fi
+}
+
+function bashrc_disable {
+	if [ -f ${HOME}/.bashrc.d/$1.enabled ] ; then
+		rm -fr ${HOME}/.bashrc.d/$1.enabled
+	fi
+}

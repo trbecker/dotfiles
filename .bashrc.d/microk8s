@@ -1,0 +1,3 @@
+if [ -x /snap/bin/microk8s ] ; then
+	alias kubectl="microk8s kubectl"
+fi
