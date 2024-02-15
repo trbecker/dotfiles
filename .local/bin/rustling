@@ -5,4 +5,4 @@ if [ -z $1 ] ; then
 	CMD="bash"
 fi
 
-podman run -it -v $PWD:/src:z rustling $CMD
+podman run -it -v $PWD:/src:z -p 3000:3000 rustling $CMD
